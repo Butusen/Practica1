@@ -9,10 +9,12 @@ gana(Letra):-
 		ganafila(Letra);
 		ganacolumna(Letra);
 		ganadiagonal(Letra).
-%se empatará en caso de que no se haya ganado &  se hayan colocado todas las fichas en el tablero
+%se empatará en caso de que no se haya ganado & se hayan colocado todas las fichas en el tablero
 empate(Letra):-
-
-                \+gana(Letra).	
+                lista(M),
+                length(M,9),
+                \+gana(x),
+                \+gana(o).
 		
 %función para ganar mediante la fila
 ganafila(Letra) :-
