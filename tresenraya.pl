@@ -9,7 +9,7 @@ gana(Letra):-
                 (ganafila(Letra);
                 ganacolumna(Letra);
                 ganadiagonal(Letra)),
-                write("Has ganado"),
+                write("Has ganado con la letra:"),
 		write(Letra).
 
 
