@@ -1,5 +1,5 @@
 
-//declaramos la lista y el turno ya que van cambiando durante la ejecución
+//declaramos la lista & el turno ya que van cambiando durante la ejecución
 :- dynamic lista/1.
 :- dynamic turno/1.
 
@@ -30,7 +30,7 @@ ganadiagonal(Letra) :-
 			(member((1,Letra),M),member((5,Letra),M),member((9,Letra),M),!);
 			(member((3,Letra),M),member((5,Letra),M),member((7,Letra),M),!).
 			
-%en esta función borramos los turnos anteriores y decimos que le toca a x u o con el assert
+%en esta función borramos los turnos anteriores decimos que le toca a x u o con el assert
 siguienteturno(x) :-
 			retractall(turno(_T)),
 			assert(turno(o)).
@@ -53,7 +53,7 @@ insertar(Posicion,Letra):-
 				retractall(lista(M)),
 				assert(lista([(Posicion,Letra)|M])).
 				
-%Aquí comprobaremos si se permite ese movimiento o no, esto se hace gracias a 	la comprobación de member con la que 
+%Aquí comprobaremos si se permite ese movimiento o no, esto se hace gracias a la comprobación de member con la que 
 %comprobaremos que no está ocupada la posición
 movlegal(Fila,Columna):- 
 				lista(L),
