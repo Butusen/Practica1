@@ -1,7 +1,5 @@
 
-%Metodo de ganar cambiar entero, siguiente turno, metodo disponible?
-% Comprobación movimiento legal, movlegal(poner(F,X,Y)) :- turno(F), \+ casilla(_F2,X,Y). 
-
+//declaramos la lista y el turno ya que van cambiando durante la ejecución
 :- dynamic lista/1.
 :- dynamic turno/1.
 
@@ -19,7 +17,7 @@ ganafila(Letra) :-
 			(member((4,Letra),M),member((5,Letra),M),member((6,Letra),M),!);
 			(member((7,Letra),M),member((8,Letra),M),member((9,Letra),M),!).
 		 
-%función para ganar mediante la fila
+%función para ganar mediante la columna
 ganacolumna(Letra) :-
 			lista(M),
 			(member((1,Letra),M),member((4,Letra),M),member((7,Letra),M),!);
