@@ -9,7 +9,8 @@ gana(Letra):-
                 (ganafila(Letra);
                 ganacolumna(Letra);
                 ganadiagonal(Letra)),
-                write("Has ganado").
+                write("Has ganado"),
+		write(Letra).
 
 
 %se empatará en caso de que no se haya ganado &  se hayan colocado todas las fichas en el tablero
