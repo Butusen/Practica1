@@ -7,7 +7,9 @@ También podrás consultar la lista que tiene el formato (Número,Letra), el nú
 Además podrás consultar si has ganado, tanto si ha sido por fila, columna o diagonal, o si has empatado.
 ## Funcionamiento
 Para ejecutar el programa debemos hacer:
-	swipl Practica1/tresenraya.pl 
+```
+swipl Practica1/tresenraya.pl 
+```
 Una vez estamos en la consola de prolog podemos empezar a hacer las consultas, que serían:
 <br />
 Consultar el turno:	

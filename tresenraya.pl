@@ -4,7 +4,7 @@
 :- dynamic lista/1.
 :- dynamic turno/1.
 
-%en el método gana incluimos las tres formas de ganar que tenemos
+%en la regla gana incluimos las tres formas de posibles de ganar (fila, columna o diagonal), además de mostrar por pantalla con que letra ha ganado.
 gana(Letra):-
                 (ganafila(Letra);
                 ganacolumna(Letra);
@@ -22,27 +22,27 @@ empate(Letra):-
                 write("Has empatado").
 
 		
-%función para ganar mediante la fila
+%regla para ganar mediante la fila
 ganafila(Letra) :-
 			lista(M),
 			((member((1,Letra),M),member((2,Letra),M),member((3,Letra),M),!);
 			(member((4,Letra),M),member((5,Letra),M),member((6,Letra),M),!);
 			(member((7,Letra),M),member((8,Letra),M),member((9,Letra),M),!)).
 		 
-%función para ganar mediante la columna
+%regla para ganar mediante la columna
 ganacolumna(Letra) :-
 			lista(M),
 			((member((1,Letra),M),member((4,Letra),M),member((7,Letra),M),!);
 			(member((2,Letra),M),member((5,Letra),M),member((8,Letra),M),!);
 			(member((3,Letra),M),member((6,Letra),M),member((9,Letra),M),!)).
 			
-%función para ganar mediante la diagonal
+%regla para ganar mediante la diagonal
 ganadiagonal(Letra) :-
 			lista(M),
 			((member((1,Letra),M),member((5,Letra),M),member((9,Letra),M),!);
-			(member((3,Letra),M),member((5,Letra),M),member((7,Letra),M),!)).
-			
-%en esta función borramos los turnos anteriores decimos que le toca a x u o con el assert
+			(member((3,Letra),M),member((5,Letra),M),member((7,Letra),M),!)).			
+
+%en esta reglas borramos los turnos anteriores, decimos que le toca a x u o con el assert
 siguienteturno(x) :-
 			retractall(turno(_T)),
 			assert(turno(o)).
@@ -50,8 +50,8 @@ siguienteturno(o) :-
 			retractall(turno(_T)),
                         assert(turno(x)).
 			
-%Aquí se comprueba si te permite colocar o no, es decir, si es tu turno o no lo es. En caso de que lo sea,
-%entonces podrás pasar a la función de insertar, en otro caso dará false
+%Aquí se comprueba si te permite colocar o no, es decir, si es tu turno & la casilla está vacía entonces insertará la Posición (se extrae de la fila & columna) & finalmente cambiará
+%de turno. En caso de que no se cumpla el turno o que la casilla esté vacía devolverá False.
 colocar(Letra,Fila,Columna) :-
 				turno(Letra),
 				movlegal(Fila,Columna),
@@ -59,21 +59,21 @@ colocar(Letra,Fila,Columna) :-
 				insertar(Posicion,Letra),
 				siguienteturno(Letra).	
 				
-%En esta función insertamos el turno en el tablero(lista) en caso de que sea nuestro turno 		
+%En esta regla borramos la anterior lista & metemos en una nueva lista la Posicion & Letra junto con los elementos de la antigua lista.		
 insertar(Posicion,Letra):-
 				lista(M),
 				retractall(lista(M)),
 				assert(lista([(Posicion,Letra)|M])).
 				
-%Aquí comprobaremos si se permite ese movimiento o no, esto se hace gracias a la comprobación de member con la que 
-%comprobaremos que no está ocupada la posición
+%Aquí comprobaremos si se permite ese movimiento o no, esto se hace con la función member, para ver si esa Posición ya se encuentra en la lista por lo que no se podría colocar o en
+%caso de que no pertenezca a la lista te devuelva True. 
 movlegal(Fila,Columna):- 
 				lista(L),
 				numero(Fila,Columna,Posicion),
 				\+ member((Posicion,_),L).
 				
 %Facts
-%en número se declararán las posiciones del tablero, tomando como la primera posición la 1,1 hasta la 3,3
+%en número se declararán las posiciones del tablero, tomando la fila & columna como coordenadas & asignandoles un número para cada tupla.
 numero(1,1,1).
 numero(1,2,2).
 numero(1,3,3).
