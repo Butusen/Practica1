@@ -7,28 +7,28 @@
 gana(Letra):- 
 		ganafila(Letra);
 		ganacolumna(Letra);
-		ganadiagonal(Letra),
-		!.
+		ganadiagonal(Letra).
+		
 		
 %función para ganar mediante la fila
 ganafila(Letra) :-
 			lista(M),
-			(member((1,Letra),M),member((2,Letra),M),member((3,Letra),M),!);
+			((member((1,Letra),M),member((2,Letra),M),member((3,Letra),M),!);
 			(member((4,Letra),M),member((5,Letra),M),member((6,Letra),M),!);
-			(member((7,Letra),M),member((8,Letra),M),member((9,Letra),M),!).
+			(member((7,Letra),M),member((8,Letra),M),member((9,Letra),M),!)).
 		 
 %función para ganar mediante la columna
 ganacolumna(Letra) :-
 			lista(M),
-			(member((1,Letra),M),member((4,Letra),M),member((7,Letra),M),!);
+			((member((1,Letra),M),member((4,Letra),M),member((7,Letra),M),!);
 			(member((2,Letra),M),member((5,Letra),M),member((8,Letra),M),!);
-			(member((3,Letra),M),member((6,Letra),M),member((9,Letra),M),!).
+			(member((3,Letra),M),member((6,Letra),M),member((9,Letra),M),!)).
 			
 %función para ganar mediante la diagonal
 ganadiagonal(Letra) :-
 			lista(M),
-			(member((1,Letra),M),member((5,Letra),M),member((9,Letra),M),!);
-			(member((3,Letra),M),member((5,Letra),M),member((7,Letra),M),!).
+			((member((1,Letra),M),member((5,Letra),M),member((9,Letra),M),!);
+			(member((3,Letra),M),member((5,Letra),M),member((7,Letra),M),!)).
 			
 %en esta función borramos los turnos anteriores decimos que le toca a x u o con el assert
 siguienteturno(x) :-
