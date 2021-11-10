@@ -1,3 +1,4 @@
+%Copyright [2021] [José Morán Nebot &  Miguel Melero Bernal] Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at apache Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 %declaramos la lista & el turno ya que van cambiando durante la ejecución
 :- dynamic lista/1.
@@ -8,7 +9,10 @@ gana(Letra):-
 		ganafila(Letra);
 		ganacolumna(Letra);
 		ganadiagonal(Letra).
-		
+%se empatará en caso de que no se haya ganado &  se hayan colocado todas las fichas en el tablero
+empate(Letra):-
+
+                \+gana(Letra).	
 		
 %función para ganar mediante la fila
 ganafila(Letra) :-
