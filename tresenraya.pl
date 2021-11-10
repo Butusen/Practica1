@@ -1,27 +1,66 @@
 % FACTS
+%Metodo de ganar cambiar entero, siguiente turno, metodo disponible?
+% Comprobación movimiento legal, movlegal(poner(F,X,Y)) :- turno(F), \+ casilla(_F2,X,Y). 
 
-Jugador('X').
-Jugador('O').
+:- dynamic lista/1.
+:- dynamic turno/1.
+gana(Letra):- 
+		ganafila(Letra);
+		ganacolumna(Letra);
+		ganadiagonal(Letra),
+		!.
+
+ganafila(Letra) :-
+			lista(M),
+			(member((1,Letra),M),member((2,Letra),M),member((3,Letra),M),!);
+			(member((4,Letra),M),member((5,Letra),M),member((6,Letra),M),!);
+			(member((7,Letra),M),member((8,Letra),M),member((9,Letra),M),!).
+		 
+
+ganacolumna(Letra) :-
+			lista(M),
+			(member((1,Letra),M),member((4,Letra),M),member((7,Letra),M),!);
+			(member((2,Letra),M),member((5,Letra),M),member((8,Letra),M),!);
+			(member((3,Letra),M),member((6,Letra),M),member((9,Letra),M),!).
+
+ganadiagonal(Letra) :-
+			lista(M),
+			(member((1,Letra),M),member((5,Letra),M),member((9,Letra),M),!);
+			(member((3,Letra),M),member((5,Letra),M),member((7,Letra),M),!).
+
+siguienteturno(x) :-
+			retractall(turno(_T)),
+			assert(turno(o)).
+siguienteturno(o) :-
+			retractall(turno(_T)),
+                        assert(turno(x)).
+			
+colocar(Letra,Fila,Columna) :-
+				turno(Letra),
+				movlegal(Fila,Columna),
+				numero(Fila,Columna,Posicion),
+				insertar(Posicion,Letra),
+				siguienteturno(Letra).			
+			
+insertar(Posicion,Letra):-
+				lista(M),
+				retractall(lista(M)),
+				assert(lista([(Posicion,Letra)|M])).
+	
+movlegal(Fila,Columna):- 
+				lista(L),
+				numero(Fila,Columna,Posicion),
+				\+ member((Posicion,_),L).
+numero(1,1,1).
+numero(1,2,2).
+numero(1,3,3).
+numero(2,1,4).
+numero(2,2,5).
+numero(2,3,6).
+numero(3,1,7).
+numero(3,2,8).
+numero(3,3,9).		
+turno(x).
+lista([]).
 
 
-gana(Tabla,Jugador):- 
-		ganafila(Tabla,Jugador);
-		ganacolumna(Tabla,Jugador);
-		ganadiagonal(Tabla,Jugador).
-
-ganafila(Tabla,Jugador) :-
-		Tabla = [Jugador,Jugador,Jugador,_,_,_,_,_,_];
-		Tabla = [_,_,_,Jugador,Jugador,Jugador,_,_,_];
-		Tabla = [_,_,_,_,_,_,Jugador,Jugador,Jugador]. 
-
-ganacolumna(Tabla,Jugador) :-
-		Tabla = [Jugador,_,_,Jugador,_,_,Jugador,_,_];
-		Tabla = [_,Jugador,_,_,Jugador,_,_,Jugador,_];
-		Tabla = [_,_,Jugador,_,_,Jugador,_,_,Jugador].
-
-ganadiagonal(Tabla,Jugador) :-
-		Tabla = [Jugador,_,_,_,Jugador,_,_,_,Jugador];
-		Tabla = [_,_,Jugador,_,Jugador,_,Jugador,_,_].
-
-
-  
