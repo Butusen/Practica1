@@ -5,16 +5,21 @@
 :- dynamic turno/1.
 
 %en el método gana incluimos las tres formas de ganar que tenemos
-gana(Letra):- 
-		ganafila(Letra);
-		ganacolumna(Letra);
-		ganadiagonal(Letra).
-%se empatará en caso de que no se haya ganado & se hayan colocado todas las fichas en el tablero
+gana(Letra):-
+                (ganafila(Letra);
+                ganacolumna(Letra);
+                ganadiagonal(Letra)),
+                write("Has ganado").
+
+
+%se empatará en caso de que no se haya ganado &  se hayan colocado todas las fichas en el tablero
 empate(Letra):-
-                lista(M),
+                (lista(M),
                 length(M,9),
                 \+gana(x),
-                \+gana(o).
+                \+gana(o)),
+                write("Has empatado").
+
 		
 %función para ganar mediante la fila
 ganafila(Letra) :-
