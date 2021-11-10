@@ -8,14 +8,21 @@ Para ejecutar el programa debemos hacer:
 	swipl Practica1/tresenraya.pl 
 Una vez estamos en la consola de prolog podemos empezar a hacer las consultas, que serían:
 Consultar el turno:	
-	'turno(M).'
+```
+turno(M).
+```
 Consultar si una casilla está libre:	
-	'movlegal(1,1).'
+```
+movlegal(1,1).
+```
 Colocar la letra "x" en la posición (1,1):
-	'colocar(x,1,1).'
+```	
+colocar(x,1,1).
+```
 Consultar si se ha ganado la partida:
-	'gana(x).'
-
+```
+gana(x).
+```
 ## Realizado con 
 
 * [Prolog](https://www.swi-prolog.org) - Lenguaje de programación lógica
