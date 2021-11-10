@@ -1,5 +1,5 @@
 
-//declaramos la lista & el turno ya que van cambiando durante la ejecución
+%declaramos la lista & el turno ya que van cambiando durante la ejecución
 :- dynamic lista/1.
 :- dynamic turno/1.
 
